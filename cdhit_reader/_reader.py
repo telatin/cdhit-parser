@@ -6,7 +6,7 @@ from more_itertools import peekable
 from xopen import xopen
 import re
 
-__all__ = ["ParsingError", "ClusterSequence", "Cluster", "ClstrReader", "read_cdhit"]
+__all__ = ["ParsingError", "ClusterSequence", "Cluster", "ClstrReader", "read_cdhit", "SeqType", "Strand"]
 
 class SeqType(Enum):
     """

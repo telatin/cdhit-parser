@@ -1,3 +1,4 @@
+from email.policy import default
 import sys
 from statistics import mean
 
@@ -13,8 +14,8 @@ from ._version import __version__
 @click.argument("clstr", type=click.Path(exists=True))
 @click.option("--stats/--no-stats", default=True, help="Show sequence statistics.")
 @click.option("--hist/--no-hist", default=False, help="Show histogram of sequence lengths.")
-
-def cli(clstr, stats: bool, hist: bool):
+@click.option("--all", default=False, is_flag=True, help="Show all sequences in the cluster.")
+def cli(clstr, stats: bool, hist: bool, all: bool):
     """
     Show information about CLSTR file
 
@@ -31,7 +32,10 @@ def cli(clstr, stats: bool, hist: bool):
         seq_lens.append(len(item))
         nitems += 1
         nseqs  += len(item)
-
+        if all:
+            print(item)
+            for s in item.sequences:
+                print(f"   {s}")
     if stats:
         click.echo(f"Input file: {clstr}")
         click.echo(f"Number of clusters: {nitems}")
