@@ -1,0 +1,7 @@
+[build-system]
+requires = ["setuptools >= 49.2.0", "wheel >= 0.34.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+profile = "black"
+src_paths = ["cdhit_reader"]

@@ -1,0 +1,5 @@
+include LICENSE.md
+include README.md
+include cdhit_reader/test/nt.clstr
+include cdhit_reader/test/aa.clstr
+include version.py
