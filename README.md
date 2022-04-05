@@ -37,5 +37,6 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-This module was based on [fasta_reader](https://github.com/EBI-Metagenomics/fasta-reader-py) by [Danilo Horta](https://github.com/horta)
+This module was based on [fasta_reader](https://github.com/EBI-Metagenomics/fasta-reader-py)
+by [Danilo Horta](https://github.com/horta)
 
