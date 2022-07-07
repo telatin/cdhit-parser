@@ -27,6 +27,12 @@ clusters = read_cdhit(input).read_items()
 pip install cdhit-reader
 ```
 
+## Demo application
+
+The module ships a demo program called `cdhit-reader.py`.
+
+[`cdhit-parser -h`](docs/chdit.svg)
+
 ## Author
 
 * [Andrea Telatin](https://github.com/telatin)
