@@ -31,7 +31,7 @@ pip install cdhit-reader
 
 The module ships a demo program called `cdhit-reader.py`.
 
-[`cdhit-parser -h`](docs/chdit.svg)
+![`cdhit-parser -h`](docs/chdit.svg)
 
 ## Author
 
