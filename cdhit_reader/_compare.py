@@ -12,6 +12,7 @@ import tempfile
 import subprocess
 def read_fasta(path):
     name = None
+    comment = ""
     with xopen(path) as fasta:
         for line in fasta:
             line = line.rstrip()
