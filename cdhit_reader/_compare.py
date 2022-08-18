@@ -10,9 +10,21 @@ from xopen import xopen
 import os
 import tempfile
 import subprocess
+
+def has_cdhit():
+    cmd = ["cd-hit", "-h"]
+    # Run cmd and save stdout as "cdout" variable, ignore exit status
+    try:
+        cdout = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode("utf-8")
+        if "CD-HIT" in cdout:
+            return True
+    except Exception:
+        return False
+  
 def read_fasta(path):
     name = None
     comment = ""
+    seq = None
     with xopen(path) as fasta:
         for line in fasta:
             line = line.rstrip()
@@ -50,6 +62,9 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     -------
     The commad line interface is in EXPERIMENTAL stage.
     """
+    if not has_cdhit():
+        click.echo("cd-hit is not installed. Please install it and try again.")
+        sys.exit(1)
     # Generate temporary directory inside "tempdir"
     SEPARATOR = "_"
     tmp = tempfile.TemporaryDirectory(dir=tempdir)
@@ -80,12 +95,11 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     cmd = ["cd-hit" if type=="prot" else "cd-hit-est", "-i", fasta_file, "-o", clstr_file, "-c", str(id), "-d", "1000"]
     if verbose:
         print("Running {}".format(" ".join(cmd)), file=sys.stderr)
-    subprocess.run(cmd, check=True)
+    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-    stats = {prefix1: [], prefix2: [], "both": [], "multiple": []}
+    stats = {prefix1: [], prefix2: [], "both": [], "multiple": [], "dupl": []}
     for cluster in read_cdhit(clstr_file + ".clstr"):
-        print(cluster.name, "\tsize=", len(cluster), sep="", file=sys.stderr)
 
         if len(cluster) == 1:
             # Singleton
@@ -96,14 +110,25 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
             pool = (cluster.refname).split(SEPARATOR)[0]
             seqname = cluster.refname[len(pool) + 1:]
             # Pairwise comparison
-            stats["both"].append(seqname)
+            pair = []
+            check = False
+            for seq in cluster.sequences:
+                sub_pool = (seq.name).split(SEPARATOR)[0]
+                sub_seqname = (seq.name)[len(pool) + 1:]
+                pair.append(sub_seqname)
+                if sub_pool != pool:
+                    check = True
+            if check == True:    
+                stats["both"].append(":".join(pair))
+            else:
+                stats["dupl"].append(":".join(pair))
         else:
             # Multiple sequences
             pass
     
     for key, list in stats.items():
         for i in list:
-            print(i, key, sep="\t")
+            print(key, i, sep="\t")
 
 
 def show_hist(seq_lens):
