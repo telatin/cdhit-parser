@@ -2,7 +2,7 @@
 0	492nt, >seq1.A... *
 1	492nt, >seq1.B... at +/99.39%
 2	369nt, >seq1.C... at +/99.19%
-3	404nt, >seq1.D... at +/95.54%
+3	404nt, >seq1.D... at -/95.54%
 >Cluster 1
 0	492nt, >seq2.A... *
 1	369nt, >seq2.C... at +/100.00%
