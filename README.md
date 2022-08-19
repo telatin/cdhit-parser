@@ -48,25 +48,26 @@ present in one of the files or those which are redundant.
 Example:
 
 ```bash
-cdhit-compare data/input1.faa data/input2.faa
+cdhit-compare data/input1.faa data/input2.faa  --id 0.99
 ```
 
 will produce:
 
 ```text
-input1_ IBJJOHBJ_00007
-input2_ IBJJOHBJ_00007
-input2_ IBJJOHBJ_00002
-both    IBJJOHBJ_00003:_IBJJOHBJ_00003
-both    IBJJOHBJ_00005:_IBJJOHBJ_00005
-both    IBJJOHBJ_00004:_IBJJOHBJ_00004
-dupl    IBJJOHBJ_00001:IBJJOHBJ_000F1
+input1  BJJOHBJ_00007
+input2  BJJOHBJ_00007
+input2  BJJOHBJ_00002
+both    BJJOHBJ_00003:BJJOHBJ_00003
+both    BJJOHBJ_00005:BJJOHBJ_00005
+both    BJJOHBJ_00004:BJJOHBJ_00004
+multi   input1#IBJJOHBJ_00006,input1#BBJJOHBJ_000B6,input1#CBJJOHBJ_000C6,input2#IBJJOHBJ_00006,input2#BBJJOHBJ_000B6,input2#CBJJOHBJ_000C6
+dupl_input1     BJJOHBJ_00001:BJJOHBJ_000F
 ```
 
 where records starting with _file1_ or _file2_ are only present in one of the files,
 records starting with _both_ are present in both files (one per file),
 records starting with _dupl_ are duplicates (two in one of the files),
-and records starting with _multi_ are present multiple times in at least one of the datasets
+and records starting with _multi_ are present multiple times in at least one of the datasets. 
 
 ## Author
 

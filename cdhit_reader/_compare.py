@@ -43,6 +43,15 @@ def relabel_fasta(path, prefix, outpath):
         for name, comment, seq in read_fasta(path):
             out.write(">{}{}{}{}\n{}\n".format(prefix, name, " " if len(comment) > 1 else "", comment, seq))
 
+def split_cluster(cluster, tag1, tag2):
+    pool1, pool2 = [], []
+    for sequence in cluster.sequences:
+        if sequence.name.startswith(tag1):
+            pool1.append(sequence)
+        elif sequence.name.startswith(tag2):
+            pool2.append(sequence)
+        else:
+            raise ValueError("Sequence {} does not start with {} or {}".format(sequence.name, tag1, tag2))
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.version_option(__version__)
 @click.argument("fasta1", type=click.Path(exists=True))
@@ -66,12 +75,15 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
         click.echo("cd-hit is not installed. Please install it and try again.")
         sys.exit(1)
     # Generate temporary directory inside "tempdir"
-    SEPARATOR = "_"
+    TAG1      = "1:::"
+    TAG2      = "2:::"
     tmp = tempfile.TemporaryDirectory(dir=tempdir)
     if verbose:
         print("Temporary directory: {}".format(tmp.name), file=sys.stderr)
-    prefix1 = tag1 if tag1 else os.path.basename(fasta1).split("_")[0].split(".")[0] + SEPARATOR
-    prefix2 = tag2 if tag2 else os.path.basename(fasta2).split("_")[0].split(".")[0] + SEPARATOR
+
+    prefix1 = tag1 if tag1 else os.path.basename(fasta1).split("_")[0].split(".")[0]
+    prefix2 = tag2 if tag2 else os.path.basename(fasta2).split("_")[0].split(".")[0]
+
     fasta_file = os.path.join(tmp.name, "seqs.fasta")
     clstr_file = os.path.join(tmp.name, "clusters.fasta")
 
@@ -86,8 +98,13 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     # Delete fasta_file if present:
     if os.path.exists(fasta_file):
         os.remove(fasta_file)
-    relabel_fasta(fasta1, prefix1, fasta_file)
-    relabel_fasta(fasta2, prefix2, fasta_file)
+    relabel_fasta(fasta1, TAG1, fasta_file)
+    relabel_fasta(fasta2, TAG2, fasta_file)
+
+    tags = {
+        TAG1: prefix1,
+        TAG2: prefix2
+    } 
     if verbose:
         print("Relabeling {} to {} (prefix: {})".format(fasta1, fasta_file, prefix1), file=sys.stderr)
         print("Relabeling {} to {} (prefix: {})".format(fasta2, fasta_file, prefix2), file=sys.stderr)
@@ -98,22 +115,20 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-    stats = {prefix1: [], prefix2: [], "both": [], "multiple": [], "dupl": []}
+    stats = {TAG1: [], TAG2: [], "both": [], "multi": [], "dupl_" + TAG1: [],  "dupl_" + TAG2: []}
     for cluster in read_cdhit(clstr_file + ".clstr"):
-
+        
+        pool = (cluster.refname)[0:len(TAG1)]
+        seqname = cluster.refname[len(pool) + 1:]
         if len(cluster) == 1:
             # Singleton
-            pool = (cluster.refname).split(SEPARATOR)[0]
-            seqname = cluster.refname[len(pool) + 1:]
-            stats[pool+SEPARATOR].append(seqname)
+            stats[pool].append(seqname)
         elif len(cluster) == 2:
-            pool = (cluster.refname).split(SEPARATOR)[0]
-            seqname = cluster.refname[len(pool) + 1:]
             # Pairwise comparison
             pair = []
             check = False
             for seq in cluster.sequences:
-                sub_pool = (seq.name).split(SEPARATOR)[0]
+                sub_pool = (seq.name)[0:len(TAG1)]
                 sub_seqname = (seq.name)[len(pool) + 1:]
                 pair.append(sub_seqname)
                 if sub_pool != pool:
@@ -121,14 +136,19 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
             if check == True:    
                 stats["both"].append(":".join(pair))
             else:
-                stats["dupl"].append(":".join(pair))
+                stats["dupl_" + pool ].append(":".join(pair))
         else:
-            # Multiple sequences
-            pass
+            print(len(cluster))
+            stats["multi"].append(",".join(i.name for i in cluster.sequences))
     
+
     for key, list in stats.items():
-        for i in list:
-            print(key, i, sep="\t")
+        for seqnames in list:
+            key = tags[key] if key in tags else key
+            key = "dupl_" + tags[key[-1*len(TAG1):]] if key[-1*len(TAG1):] in tags else key
+            seqnames = seqnames.replace(TAG1, tags[TAG1] + "#").replace(TAG2, tags[TAG2] + "#")
+            
+            print(key, seqnames, sep="\t")
 
 
 def show_hist(seq_lens):
