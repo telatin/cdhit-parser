@@ -28,6 +28,11 @@ clusters = read_cdhit(input).read_items()
 pip install cdhit-reader
 ```
 
+or via [Miniconda](https://telatin.github.io/microbiome-bioinformatics/Install-Miniconda/), which will also install cd-hit
+```bash
+conda install -c bioconda -c conda-forge cdhit-reader
+```
+
 ## Demo applications
 
 ### Cluster stats
