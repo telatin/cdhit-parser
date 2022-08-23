@@ -1,5 +1,8 @@
 # cdhit-parser
 
+[![Python package](https://github.com/telatin/cdhit-parser/actions/workflows/python-package.yml/badge.svg)](https://github.com/telatin/cdhit-parser/actions/workflows/python-package.yml)
+[![Conda downloads](https://img.shields.io/conda/dn/bioconda/cdhit-reader)](https://anaconda.org/bioconda/cdhit-reader)
+
 CD-HIT file reader.
 
 ## Read CD-HIT .clstr file
@@ -38,6 +41,11 @@ if os.path.exists(fileName):
 
 ```bash
 pip install cdhit-reader
+```
+
+or via [Miniconda](https://telatin.github.io/microbiome-bioinformatics/Install-Miniconda/), which will also install cd-hit
+```bash
+conda install -c bioconda -c conda-forge cdhit-reader
 ```
 
 ## Demo applications
