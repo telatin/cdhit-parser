@@ -44,6 +44,7 @@ pip install cdhit-reader
 ```
 
 or via [Miniconda](https://telatin.github.io/microbiome-bioinformatics/Install-Miniconda/), which will also install cd-hit
+
 ```bash
 conda install -c bioconda -c conda-forge cdhit-reader
 ```
@@ -101,4 +102,3 @@ This project is licensed under the MIT License.
 
 This module was based on [fasta_reader](https://github.com/EBI-Metagenomics/fasta-reader-py)
 by [Danilo Horta](https://github.com/horta)
-
