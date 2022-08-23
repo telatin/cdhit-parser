@@ -2,7 +2,7 @@
 
 CD-HIT file reader.
 
-## Examples
+## Read CD-HIT .clstr file
 
 Basic usage
 
@@ -16,10 +16,22 @@ for cluster in read_cdhit(input):
 ```
 
 Load all clusters in to a list:
+
 ```python
 
 # Load all clusters to a list
 clusters = read_cdhit(input).read_items()
+```
+
+## Read FASTA file
+
+```python
+if os.path.exists(fileName):
+    for seq in cdhit_reader.read_fasta(fileName, line_len=60):
+        print(seq) # will be wrapped at 60 chars per line, use 0 to disable wrapping
+        
+        # to access individual attributes:
+        # print(">" + seq.name + " " + seq.comment + "\n" + seq.sequence)
 ```
 
 ## Install
