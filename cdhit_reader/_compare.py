@@ -77,15 +77,18 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     # Generate temporary directory inside "tempdir"
     TAG1      = "1:::"
     TAG2      = "2:::"
-    tmp = tempfile.TemporaryDirectory(dir=tempdir)
+    # tmp is a temporary directory not to be deleted
+    tmp = tempfile.mkdtemp(dir=tempdir, prefix="cdhit_")
+
+    #tmp = tempfile.TemporaryDirectory(dir=tempdir, prefix="cdhit_reader_", suffix=".tmp")
     if verbose:
-        print("Temporary directory: {}".format(tmp.name), file=sys.stderr)
+        print("Temporary directory: {}".format(tmp), file=sys.stderr)
 
     prefix1 = tag1 if tag1 else os.path.basename(fasta1).split("_")[0].split(".")[0]
     prefix2 = tag2 if tag2 else os.path.basename(fasta2).split("_")[0].split(".")[0]
 
-    fasta_file = os.path.join(tmp.name, "seqs.fasta")
-    clstr_file = os.path.join(tmp.name, "clusters.fasta")
+    fasta_file = os.path.join(tmp, "seqs.fasta")
+    clstr_file = os.path.join(tmp, "clusters.fasta")
 
     if type is None:
         type = "prot" if "faa" in fasta1 else "nucl"
@@ -98,7 +101,15 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     # Delete fasta_file if present:
     if os.path.exists(fasta_file):
         os.remove(fasta_file)
+    
+    if verbose:
+        print("Relabeling {} to {}".format(fasta1, fasta_file), file=sys.stderr)
+    
     relabel_fasta(fasta1, TAG1, fasta_file)
+
+    if verbose:
+        print("Relabeling {} to {}".format(fasta2, fasta_file), file=sys.stderr)
+    
     relabel_fasta(fasta2, TAG2, fasta_file)
 
     tags = {
@@ -119,6 +130,8 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
     for cluster in read_cdhit(clstr_file + ".clstr"):
         
         pool = (cluster.refname)[0:len(TAG1)]
+        if pool != TAG1 and pool != TAG2:
+            raise ValueError("Cluster {} does not start with {} or {}".format(cluster.refname, TAG1, TAG2))
         seqname = cluster.refname[len(pool) + 1:]
         if len(cluster) == 1:
             # Singleton
@@ -138,11 +151,12 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
             else:
                 stats["dupl_" + pool ].append(":".join(pair))
         else:
-            print(len(cluster))
+            
             stats["multi"].append(",".join(i.name for i in cluster.sequences))
     
 
     for key, list in stats.items():
+        print("{} {}".format(key, len(list)), file=sys.stderr)
         for seqnames in list:
             key = tags[key] if key in tags else key
             key = "dupl_" + tags[key[-1*len(TAG1):]] if key[-1*len(TAG1):] in tags else key
@@ -150,6 +164,8 @@ def compare(fasta1, fasta2, tag1: str, tag2: str, tempdir, type: str, id: float,
             
             print(key, seqnames, sep="\t")
 
+    #if not verbose:
+    #    os.remove(tmp)
 
 def show_hist(seq_lens):
     pass
