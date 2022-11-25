@@ -1,0 +1,26 @@
+>Cluster 0
+0	1016aa, >ciao.IBJJOHBJ_00007... *
+>Cluster 1
+0	1016aa, >momi.IBJJOHBJ_00007... *
+>Cluster 2
+0	371aa, >ciao.IBJJOHBJ_00001... *
+1	366aa, >ciao.IBJJOHBJ_000F1... at 98.91%
+>Cluster 3
+0	351aa, >ciao.IBJJOHBJ_00006... *
+1	351aa, >ciao.BBJJOHBJ_000B6... at 98.86%
+2	346aa, >ciao.CBJJOHBJ_000C6... at 97.11%
+3	351aa, >momi.IBJJOHBJ_00006... at 100.00%
+4	351aa, >momi.BBJJOHBJ_000B6... at 98.86%
+5	346aa, >momi.CBJJOHBJ_000C6... at 97.11%
+>Cluster 4
+0	345aa, >ciao.IBJJOHBJ_00003... *
+1	345aa, >momi.IBJJOHBJ_00003... at 100.00%
+>Cluster 5
+0	298aa, >ciao.IBJJOHBJ_00005... *
+1	298aa, >momi.IBJJOHBJ_00005... at 100.00%
+>Cluster 6
+0	195aa, >ciao.IBJJOHBJ_00002... *
+1	195aa, >momi.IBJJOHBJ_00002... at 100.00%
+>Cluster 7
+0	105aa, >ciao.IBJJOHBJ_00004... *
+1	105aa, >momi.IBJJOHBJ_00004... at 100.00%
