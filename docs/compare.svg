@@ -19,75 +19,75 @@
         font-weight: 700;
     }
 
-    .terminal-2690232603-matrix {
+    .terminal-556677810-matrix {
         font-family: Fira Code, monospace;
         font-size: 20px;
         line-height: 24.4px;
         font-variant-east-asian: full-width;
     }
 
-    .terminal-2690232603-title {
+    .terminal-556677810-title {
         font-size: 18px;
         font-weight: bold;
         font-family: arial;
     }
 
-    .terminal-2690232603-r1 { fill: #c5c8c6 }
+    .terminal-556677810-r1 { fill: #c5c8c6 }
     </style>
 
     <defs>
-    <clipPath id="terminal-2690232603-clip-terminal">
+    <clipPath id="terminal-556677810-clip-terminal">
       <rect x="0" y="0" width="975.0" height="438.2" />
     </clipPath>
-    <clipPath id="terminal-2690232603-line-0">
+    <clipPath id="terminal-556677810-line-0">
     <rect x="0" y="1.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-1">
+<clipPath id="terminal-556677810-line-1">
     <rect x="0" y="25.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-2">
+<clipPath id="terminal-556677810-line-2">
     <rect x="0" y="50.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-3">
+<clipPath id="terminal-556677810-line-3">
     <rect x="0" y="74.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-4">
+<clipPath id="terminal-556677810-line-4">
     <rect x="0" y="99.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-5">
+<clipPath id="terminal-556677810-line-5">
     <rect x="0" y="123.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-6">
+<clipPath id="terminal-556677810-line-6">
     <rect x="0" y="147.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-7">
+<clipPath id="terminal-556677810-line-7">
     <rect x="0" y="172.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-8">
+<clipPath id="terminal-556677810-line-8">
     <rect x="0" y="196.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-9">
+<clipPath id="terminal-556677810-line-9">
     <rect x="0" y="221.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-10">
+<clipPath id="terminal-556677810-line-10">
     <rect x="0" y="245.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-11">
+<clipPath id="terminal-556677810-line-11">
     <rect x="0" y="269.9" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-12">
+<clipPath id="terminal-556677810-line-12">
     <rect x="0" y="294.3" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-13">
+<clipPath id="terminal-556677810-line-13">
     <rect x="0" y="318.7" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-14">
+<clipPath id="terminal-556677810-line-14">
     <rect x="0" y="343.1" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-15">
+<clipPath id="terminal-556677810-line-15">
     <rect x="0" y="367.5" width="976" height="24.65"/>
             </clipPath>
-<clipPath id="terminal-2690232603-line-16">
+<clipPath id="terminal-556677810-line-16">
     <rect x="0" y="391.9" width="976" height="24.65"/>
             </clipPath>
     </defs>
@@ -99,27 +99,27 @@
             <circle cx="44" cy="0" r="7" fill="#28c840"/>
             </g>
         
-    <g transform="translate(9, 41)" clip-path="url(#terminal-2690232603-clip-terminal)">
+    <g transform="translate(9, 41)" clip-path="url(#terminal-556677810-clip-terminal)">
     
-    <g class="terminal-2690232603-matrix">
-    <text class="terminal-2690232603-r1" x="0" y="20" textLength="268.4" clip-path="url(#terminal-2690232603-line-0)">$&#160;cdhit-compare&#160;--help</text><text class="terminal-2690232603-r1" x="976" y="20" textLength="12.2" clip-path="url(#terminal-2690232603-line-0)">
-</text><text class="terminal-2690232603-r1" x="0" y="44.4" textLength="536.8" clip-path="url(#terminal-2690232603-line-1)">Usage:&#160;cdhit-compare&#160;[OPTIONS]&#160;FASTA1&#160;FASTA2</text><text class="terminal-2690232603-r1" x="976" y="44.4" textLength="12.2" clip-path="url(#terminal-2690232603-line-1)">
-</text><text class="terminal-2690232603-r1" x="976" y="68.8" textLength="12.2" clip-path="url(#terminal-2690232603-line-2)">
-</text><text class="terminal-2690232603-r1" x="0" y="93.2" textLength="256.2" clip-path="url(#terminal-2690232603-line-3)">&#160;&#160;Compare&#160;FASTA&#160;files</text><text class="terminal-2690232603-r1" x="976" y="93.2" textLength="12.2" clip-path="url(#terminal-2690232603-line-3)">
-</text><text class="terminal-2690232603-r1" x="976" y="117.6" textLength="12.2" clip-path="url(#terminal-2690232603-line-4)">
-</text><text class="terminal-2690232603-r1" x="0" y="142" textLength="109.8" clip-path="url(#terminal-2690232603-line-5)">&#160;&#160;Warning</text><text class="terminal-2690232603-r1" x="976" y="142" textLength="12.2" clip-path="url(#terminal-2690232603-line-5)">
-</text><text class="terminal-2690232603-r1" x="0" y="166.4" textLength="109.8" clip-path="url(#terminal-2690232603-line-6)">&#160;&#160;-------</text><text class="terminal-2690232603-r1" x="976" y="166.4" textLength="12.2" clip-path="url(#terminal-2690232603-line-6)">
-</text><text class="terminal-2690232603-r1" x="0" y="190.8" textLength="646.6" clip-path="url(#terminal-2690232603-line-7)">&#160;&#160;The&#160;commad&#160;line&#160;interface&#160;is&#160;in&#160;EXPERIMENTAL&#160;stage.</text><text class="terminal-2690232603-r1" x="976" y="190.8" textLength="12.2" clip-path="url(#terminal-2690232603-line-7)">
-</text><text class="terminal-2690232603-r1" x="976" y="215.2" textLength="12.2" clip-path="url(#terminal-2690232603-line-8)">
-</text><text class="terminal-2690232603-r1" x="0" y="239.6" textLength="97.6" clip-path="url(#terminal-2690232603-line-9)">Options:</text><text class="terminal-2690232603-r1" x="976" y="239.6" textLength="12.2" clip-path="url(#terminal-2690232603-line-9)">
-</text><text class="terminal-2690232603-r1" x="0" y="264" textLength="536.8" clip-path="url(#terminal-2690232603-line-10)">&#160;&#160;--version&#160;&#160;&#160;&#160;&#160;&#160;&#160;Show&#160;the&#160;version&#160;and&#160;exit.</text><text class="terminal-2690232603-r1" x="976" y="264" textLength="12.2" clip-path="url(#terminal-2690232603-line-10)">
-</text><text class="terminal-2690232603-r1" x="0" y="288.4" textLength="524.6" clip-path="url(#terminal-2690232603-line-11)">&#160;&#160;--tag1&#160;TEXT&#160;&#160;&#160;&#160;&#160;Name&#160;of&#160;the&#160;first&#160;dataset</text><text class="terminal-2690232603-r1" x="976" y="288.4" textLength="12.2" clip-path="url(#terminal-2690232603-line-11)">
-</text><text class="terminal-2690232603-r1" x="0" y="312.8" textLength="536.8" clip-path="url(#terminal-2690232603-line-12)">&#160;&#160;--tag2&#160;TEXT&#160;&#160;&#160;&#160;&#160;Name&#160;of&#160;the&#160;second&#160;dataset</text><text class="terminal-2690232603-r1" x="976" y="312.8" textLength="12.2" clip-path="url(#terminal-2690232603-line-12)">
-</text><text class="terminal-2690232603-r1" x="0" y="337.2" textLength="622.2" clip-path="url(#terminal-2690232603-line-13)">&#160;&#160;--id&#160;FLOAT&#160;&#160;&#160;&#160;&#160;&#160;Identity&#160;threshold&#160;[default:&#160;0.9]</text><text class="terminal-2690232603-r1" x="976" y="337.2" textLength="12.2" clip-path="url(#terminal-2690232603-line-13)">
-</text><text class="terminal-2690232603-r1" x="0" y="361.6" textLength="658.8" clip-path="url(#terminal-2690232603-line-14)">&#160;&#160;--type&#160;TEXT&#160;&#160;&#160;&#160;&#160;Type&#160;of&#160;the&#160;sequences&#160;(nucl&#160;or&#160;prot)</text><text class="terminal-2690232603-r1" x="976" y="361.6" textLength="12.2" clip-path="url(#terminal-2690232603-line-14)">
-</text><text class="terminal-2690232603-r1" x="0" y="386" textLength="732" clip-path="url(#terminal-2690232603-line-15)">&#160;&#160;--tempdir&#160;PATH&#160;&#160;Temporary&#160;directory&#160;for&#160;intermediate&#160;files</text><text class="terminal-2690232603-r1" x="976" y="386" textLength="12.2" clip-path="url(#terminal-2690232603-line-15)">
-</text><text class="terminal-2690232603-r1" x="0" y="410.4" textLength="512.4" clip-path="url(#terminal-2690232603-line-16)">&#160;&#160;--verbose&#160;&#160;&#160;&#160;&#160;&#160;&#160;Show&#160;verbose&#160;information</text><text class="terminal-2690232603-r1" x="976" y="410.4" textLength="12.2" clip-path="url(#terminal-2690232603-line-16)">
-</text><text class="terminal-2690232603-r1" x="0" y="434.8" textLength="549" clip-path="url(#terminal-2690232603-line-17)">&#160;&#160;-h,&#160;--help&#160;&#160;&#160;&#160;&#160;&#160;Show&#160;this&#160;message&#160;and&#160;exit.</text><text class="terminal-2690232603-r1" x="976" y="434.8" textLength="12.2" clip-path="url(#terminal-2690232603-line-17)">
+    <g class="terminal-556677810-matrix">
+    <text class="terminal-556677810-r1" x="0" y="20" textLength="268.4" clip-path="url(#terminal-556677810-line-0)">$&#160;cdhit-compare&#160;--help</text><text class="terminal-556677810-r1" x="976" y="20" textLength="12.2" clip-path="url(#terminal-556677810-line-0)">
+</text><text class="terminal-556677810-r1" x="0" y="44.4" textLength="536.8" clip-path="url(#terminal-556677810-line-1)">Usage:&#160;cdhit-compare&#160;[OPTIONS]&#160;FASTA1&#160;FASTA2</text><text class="terminal-556677810-r1" x="976" y="44.4" textLength="12.2" clip-path="url(#terminal-556677810-line-1)">
+</text><text class="terminal-556677810-r1" x="976" y="68.8" textLength="12.2" clip-path="url(#terminal-556677810-line-2)">
+</text><text class="terminal-556677810-r1" x="0" y="93.2" textLength="256.2" clip-path="url(#terminal-556677810-line-3)">&#160;&#160;Compare&#160;FASTA&#160;files</text><text class="terminal-556677810-r1" x="976" y="93.2" textLength="12.2" clip-path="url(#terminal-556677810-line-3)">
+</text><text class="terminal-556677810-r1" x="976" y="117.6" textLength="12.2" clip-path="url(#terminal-556677810-line-4)">
+</text><text class="terminal-556677810-r1" x="0" y="142" textLength="109.8" clip-path="url(#terminal-556677810-line-5)">&#160;&#160;Warning</text><text class="terminal-556677810-r1" x="976" y="142" textLength="12.2" clip-path="url(#terminal-556677810-line-5)">
+</text><text class="terminal-556677810-r1" x="0" y="166.4" textLength="109.8" clip-path="url(#terminal-556677810-line-6)">&#160;&#160;-------</text><text class="terminal-556677810-r1" x="976" y="166.4" textLength="12.2" clip-path="url(#terminal-556677810-line-6)">
+</text><text class="terminal-556677810-r1" x="0" y="190.8" textLength="646.6" clip-path="url(#terminal-556677810-line-7)">&#160;&#160;The&#160;commad&#160;line&#160;interface&#160;is&#160;in&#160;EXPERIMENTAL&#160;stage.</text><text class="terminal-556677810-r1" x="976" y="190.8" textLength="12.2" clip-path="url(#terminal-556677810-line-7)">
+</text><text class="terminal-556677810-r1" x="976" y="215.2" textLength="12.2" clip-path="url(#terminal-556677810-line-8)">
+</text><text class="terminal-556677810-r1" x="0" y="239.6" textLength="97.6" clip-path="url(#terminal-556677810-line-9)">Options:</text><text class="terminal-556677810-r1" x="976" y="239.6" textLength="12.2" clip-path="url(#terminal-556677810-line-9)">
+</text><text class="terminal-556677810-r1" x="0" y="264" textLength="536.8" clip-path="url(#terminal-556677810-line-10)">&#160;&#160;--version&#160;&#160;&#160;&#160;&#160;&#160;&#160;Show&#160;the&#160;version&#160;and&#160;exit.</text><text class="terminal-556677810-r1" x="976" y="264" textLength="12.2" clip-path="url(#terminal-556677810-line-10)">
+</text><text class="terminal-556677810-r1" x="0" y="288.4" textLength="524.6" clip-path="url(#terminal-556677810-line-11)">&#160;&#160;--tag1&#160;TEXT&#160;&#160;&#160;&#160;&#160;Name&#160;of&#160;the&#160;first&#160;dataset</text><text class="terminal-556677810-r1" x="976" y="288.4" textLength="12.2" clip-path="url(#terminal-556677810-line-11)">
+</text><text class="terminal-556677810-r1" x="0" y="312.8" textLength="536.8" clip-path="url(#terminal-556677810-line-12)">&#160;&#160;--tag2&#160;TEXT&#160;&#160;&#160;&#160;&#160;Name&#160;of&#160;the&#160;second&#160;dataset</text><text class="terminal-556677810-r1" x="976" y="312.8" textLength="12.2" clip-path="url(#terminal-556677810-line-12)">
+</text><text class="terminal-556677810-r1" x="0" y="337.2" textLength="622.2" clip-path="url(#terminal-556677810-line-13)">&#160;&#160;--id&#160;FLOAT&#160;&#160;&#160;&#160;&#160;&#160;Identity&#160;threshold&#160;[default:&#160;0.9]</text><text class="terminal-556677810-r1" x="976" y="337.2" textLength="12.2" clip-path="url(#terminal-556677810-line-13)">
+</text><text class="terminal-556677810-r1" x="0" y="361.6" textLength="658.8" clip-path="url(#terminal-556677810-line-14)">&#160;&#160;--type&#160;TEXT&#160;&#160;&#160;&#160;&#160;Type&#160;of&#160;the&#160;sequences&#160;(nucl&#160;or&#160;prot)</text><text class="terminal-556677810-r1" x="976" y="361.6" textLength="12.2" clip-path="url(#terminal-556677810-line-14)">
+</text><text class="terminal-556677810-r1" x="0" y="386" textLength="732" clip-path="url(#terminal-556677810-line-15)">&#160;&#160;--tempdir&#160;PATH&#160;&#160;Temporary&#160;directory&#160;for&#160;intermediate&#160;files</text><text class="terminal-556677810-r1" x="976" y="386" textLength="12.2" clip-path="url(#terminal-556677810-line-15)">
+</text><text class="terminal-556677810-r1" x="0" y="410.4" textLength="512.4" clip-path="url(#terminal-556677810-line-16)">&#160;&#160;--verbose&#160;&#160;&#160;&#160;&#160;&#160;&#160;Show&#160;verbose&#160;information</text><text class="terminal-556677810-r1" x="976" y="410.4" textLength="12.2" clip-path="url(#terminal-556677810-line-16)">
+</text><text class="terminal-556677810-r1" x="0" y="434.8" textLength="549" clip-path="url(#terminal-556677810-line-17)">&#160;&#160;-h,&#160;--help&#160;&#160;&#160;&#160;&#160;&#160;Show&#160;this&#160;message&#160;and&#160;exit.</text><text class="terminal-556677810-r1" x="976" y="434.8" textLength="12.2" clip-path="url(#terminal-556677810-line-17)">
 </text>
     </g>
     </g>
