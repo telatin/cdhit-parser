@@ -1,4 +1,4 @@
-from email.policy import default
+
 import sys
 from statistics import mean
 
