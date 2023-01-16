@@ -81,7 +81,7 @@ class ClusterSequence:
         3       502nt, >IKXM6KN01CFAFI... at 1:502:1:503/+/97.81%
         """
         pattern = re.compile(r'(?P<id>\d+)\s+(?P<size>\d+)(?P<type>aa|nt), >(?P<name>.+?)\.\.\. (?P<attr>.+)')
-        attrpatt = re.compile(r'(?P<ref>\*|at) .*?(?P<strand>[+-]?)\/?(?P<percent>\d+\.\d+)%')
+        attrpatt = re.compile(r'(?P<ref>\*|at) .*?(?P<strand>[+-]?)\/?(?P<percent>\d+\.?\d+)%')
         match = pattern.search(self.line)
 
         self.seqtype = SeqType.PROTEIN if match["type"] == "aa" else SeqType.NT
