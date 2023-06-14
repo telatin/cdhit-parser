@@ -1,4 +1,3 @@
-
 import sys
 from statistics import mean
 
@@ -6,15 +5,20 @@ import click
 
 from ._reader import read_cdhit
 from ._version import __version__
-#from ._writer import write_fasta
+
+# from ._writer import write_fasta
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.version_option(__version__)
 @click.argument("clstr", type=click.Path(exists=True))
 @click.option("--stats/--no-stats", default=True, help="Show sequence statistics.")
-@click.option("--hist/--no-hist", default=False, help="Show histogram of sequence lengths.")
-@click.option("--all", default=False, is_flag=True, help="Show all sequences in the cluster.")
+@click.option(
+    "--hist/--no-hist", default=False, help="Show histogram of sequence lengths."
+)
+@click.option(
+    "--all", default=False, is_flag=True, help="Show all sequences in the cluster."
+)
 def cli(clstr, stats: bool, hist: bool, all: bool):
     """
     Show information about CLSTR file
@@ -22,7 +26,7 @@ def cli(clstr, stats: bool, hist: bool, all: bool):
     \b
     Warning
     -------
-    The commad line interface is in EXPERIMENTAL stage.  
+    The commad line interface is in EXPERIMENTAL stage.
     """
 
     nitems = 0
@@ -31,7 +35,7 @@ def cli(clstr, stats: bool, hist: bool, all: bool):
     for item in read_cdhit(clstr):
         seq_lens.append(len(item))
         nitems += 1
-        nseqs  += len(item)
+        nseqs += len(item)
         if all:
             print(item)
             for s in item.sequences:
@@ -40,7 +44,7 @@ def cli(clstr, stats: bool, hist: bool, all: bool):
         click.echo(f"Input file: {clstr}")
         click.echo(f"Number of clusters: {nitems}")
         click.echo(f"Total sequences: {nseqs}")
-        
+
         msg = f"Cluster size: min {min(seq_lens)}, mean {mean(seq_lens):.2f}, max {max(seq_lens)}"
         click.echo(msg)
 
@@ -49,4 +53,16 @@ def cli(clstr, stats: bool, hist: bool, all: bool):
 
 
 def show_hist(seq_lens):
+    """
+    Displays a histogram of sequence lengths.
+    Args:
+      seq_lens (list): A list of sequence lengths.
+    Returns:
+      None
+    Side Effects:
+      Displays a histogram of sequence lengths.
+    Examples:
+      >>> show_hist([1, 2, 3, 4, 5])
+      Histogram of sequence lengths displayed.
+    """
     pass

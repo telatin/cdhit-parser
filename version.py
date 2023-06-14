@@ -5,6 +5,16 @@ from setuptools import find_packages
 
 
 def get():
+    """
+    Gets the version of the package.
+    Args:
+      None
+    Returns:
+      str: The version of the package.
+    Examples:
+      >>> get()
+      '1.0.0'
+    """
     pkgnames = find_packages()
     if len(pkgnames) == 0:
         return "unknown"
