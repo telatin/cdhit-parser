@@ -5,21 +5,9 @@ import pytest
 import sys
 from cdhit_reader import ParsingError, read_cdhit, SeqType, Strand
 
-
 def test_nt():
-    """
-    Tests the read_cdhit function on a nucleotide file.
-    Args:
-      input (str): The name of the nucleotide file.
-    Returns:
-      None
-    Side Effects:
-      Skips the test if the file is not found.
-    Examples:
-      >>> test_nt("small_nt.clstr")
-    """
     input = "small_nt.clstr"
-
+    
     cluster1names = ["seq1.A", "seq1.B", "seq1.C", "seq1.D"]
     cluster1strands = [Strand.PLUS, Strand.PLUS, Strand.PLUS, Strand.REVERSE]
     # List files in path
@@ -27,7 +15,8 @@ def test_nt():
     filePath = os.path.join(path, input)
     if not os.path.exists(filePath):
         pytest.skip("File not found: {}".format(filePath))
-
+    
+    
     n = 0
     for cluster in read_cdhit(filePath):
         # Cluster name is a progressive number from 0 to n-1
@@ -48,26 +37,16 @@ def test_nt():
 
 
 def test_aa():
-    """
-    Tests the read_cdhit function on an amino acid file.
-    Args:
-      input (str): The name of the amino acid file.
-    Returns:
-      None
-    Side Effects:
-      Skips the test if the file is not found.
-    Examples:
-      >>> test_aa("small_aa.clstr")
-    """
     input = "small_aa.clstr"
-
+    
     cluster2 = ["IBJJOHBJ_00001", "IBJJOHBJ_000F1"]
     # List files in path
     path = Path(os.path.dirname(__file__))
     filePath = os.path.join(path, input)
     if not os.path.exists(filePath):
         pytest.skip("File not found: {}".format(filePath))
-
+    
+    
     n = 0
     for cluster in read_cdhit(filePath):
         # Cluster name is a progressive number from 0 to n-1
@@ -81,19 +60,8 @@ def test_aa():
             assert [s.name for s in cluster.sequences] == cluster2
             assert cluster.refname == cluster2[0]
         n += 1
-
-
+        
 def _test_cluster_structure(cluster):
-    """
-    Tests the structure of a cluster.
-    Args:
-      cluster (cdhit_reader.Cluster): The cluster to test.
-    Returns:
-      bool: True if the cluster structure is valid, False otherwise.
-    Examples:
-      >>> _test_cluster_structure(cluster)
-      True
-    """
     # name
     assert cluster.name is not None
     # refname
@@ -101,28 +69,17 @@ def _test_cluster_structure(cluster):
     assert cluster.refname in [s.name for s in cluster.sequences]
     # sequences
     assert len(cluster.sequences) > 0
-    assert [_test_seq(s) == True for s in cluster.sequences]
+    assert [_test_seq(s)  == True for s in cluster.sequences]
     return True
 
-
 def _test_seq(s):
-    """
-    Tests the structure of a sequence.
-    Args:
-      s (cdhit_reader.Sequence): The sequence to test.
-    Returns:
-      bool: True if the sequence structure is valid, False otherwise.
-    Examples:
-      >>> _test_seq(s)
-      True
-    """
     assert s.id is not None
     assert int(s.id) >= 0
     assert s.identity >= 0
     assert s.identity <= 100
     assert s.length > 0
     assert int(s.length) > 0
-
+    
     assert s.seqtype is not None
     assert s.seqtype == SeqType.NT or s.seqtype == SeqType.PROTEIN
 
