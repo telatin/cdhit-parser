@@ -86,7 +86,7 @@ class ClusterSequence:
             r"(?P<id>\d+)\s+(?P<size>\d+)(?P<type>aa|nt), >(?P<name>.+?)\.\.\. (?P<attr>.+)"
         )
         attrpatt = re.compile(         
-            r"(?P<ref>\*|at) .*?(?P<strand>[+-]?)\/?(?P<percent>\d+\.?\d+)%"
+            r"(?P<ref>\*|at) .*?(?P<strand>[+-]?)\/?(?P<percent>\d+\.?\d*)%"
         )
 
 
