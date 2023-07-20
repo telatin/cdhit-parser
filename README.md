@@ -11,6 +11,7 @@ CD-HIT file reader.
 Basic usage
 
 ```python
+from cdhit_reader import  read_cdhit
 input = "cluster.fa.clstr"
 for cluster in read_cdhit(input):
     print(f"{cluster.name} refSequence={cluster.refname} size={len(cluster)}")
