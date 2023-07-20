@@ -3,6 +3,7 @@
 [![Python package](https://github.com/telatin/cdhit-parser/actions/workflows/python-package.yml/badge.svg)](https://github.com/telatin/cdhit-parser/actions/workflows/python-package.yml)
 [![Conda downloads](https://img.shields.io/conda/dn/bioconda/cdhit-reader)](https://anaconda.org/bioconda/cdhit-reader)
 [![pipy](https://img.shields.io/pypi/dm/cdhit-reader?color=blue&label=pipy%20downloads)](https://pypi.org/project/cdhit-reader/)
+![PyPI](https://img.shields.io/pypi/v/cdhit-reader)
 
 CD-HIT file reader.
 
