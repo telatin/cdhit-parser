@@ -1,12 +1,31 @@
 from __future__ import annotations
 from pathlib import Path
 from typing import IO, Iterator, List, Union
-from enum import Enum
 from more_itertools import peekable
 from xopen import xopen
-import re
 
-__all__ = ["Sequence", "FastaReader", "read_fasta"]
+__all__ = ["FastaParsingError", "Sequence", "FastaReader", "read_fasta"]
+
+
+class FastaParsingError(Exception):
+    """
+    FASTA parsing error.
+    """
+
+    def __init__(self, line_number: int, message: str = "Invalid FASTA file"):
+        super().__init__(f"{message} at line {line_number}.")
+        self._line_number = line_number
+
+    @property
+    def line_number(self) -> int:
+        """
+        Line number.
+
+        Returns
+        -------
+        Line number.
+        """
+        return self._line_number
  
  
 
@@ -54,6 +73,7 @@ class FastaReader:
         self._seq = ""
         self._lines = peekable(line for line in file)
         self._line_number = 0
+        self._current_defline_number = 0
 
     def read_item(self) -> Sequence:
         """
@@ -87,34 +107,46 @@ class FastaReader:
 
     def _next_defline(self) -> str:
         while True:
-            line = next(self._lines)
-            self._line_number += 1
-            if line == "":
+            try:
+                line = next(self._lines)
+            except StopIteration:
                 raise StopIteration
+
+            self._line_number += 1
 
             line = line.strip()
             if line.startswith(">"):
+                self._current_defline_number = self._line_number
                 return line[1:]
             if line != "":
-                raise "Invalid FASTA file"
+                raise FastaParsingError(self._line_number, "Expected FASTA header")
 
     def _next_sequences(self) -> str:
         seq = ""
         while True:
-            line = next(self._lines).strip()
-            
+            try:
+                line = next(self._lines)
+            except StopIteration as exc:
+                raise FastaParsingError(
+                    self._current_defline_number,
+                    "Missing sequence for FASTA record",
+                ) from exc
+
             self._line_number += 1
-            if line == "":
-                raise
 
             line = line.strip()
-            if not line.startswith(">"):
-                seq += line
-                if self._sequence_continues():
-                    continue
-                return seq
-            if line != "":
-                raise 
+            if line == "":
+                raise FastaParsingError(self._line_number, "Blank lines are not allowed in FASTA records")
+            if line.startswith(">"):
+                raise FastaParsingError(
+                    self._current_defline_number,
+                    "Missing sequence for FASTA record",
+                )
+
+            seq += line
+            if self._sequence_continues():
+                continue
+            return seq
      
 
     def _sequence_continues(self):
