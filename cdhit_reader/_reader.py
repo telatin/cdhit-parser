@@ -8,6 +8,13 @@ import re
 
 __all__ = ["ParsingError", "ClusterSequence", "Cluster", "ClstrReader", "read_cdhit", "SeqType", "Strand", "FastaReader", "read_fasta"]
 
+CLUSTER_SEQUENCE_PATTERN = re.compile(
+    r"(?P<id>\d+)\s+(?P<size>\d+)(?P<type>aa|nt), >(?P<name>.+?)\.\.\. (?P<attr>.+)"
+)
+CLUSTER_ATTR_PATTERN = re.compile(
+    r"(?P<ref>\*|at) .*?(?P<strand>[+-]?)\/?(?P<percent>\d+\.?\d*)%"
+)
+
 class SeqType(Enum):
     """
     Sequence type.
@@ -59,7 +66,7 @@ class ClusterSequence:
     ----------
     line: str
     """
-    def __init__(self, line: str):
+    def __init__(self, line: str, line_number: int | None = None):
         """
         Parameters
         ----------
@@ -67,6 +74,7 @@ class ClusterSequence:
             Line.
         """
         self.line = line
+        self.line_number = line_number
         self.length = 0
         self.name = ""
         self.identity = 0
@@ -80,33 +88,32 @@ class ClusterSequence:
         """
         3       502nt, >IKXM6KN01CFAFI... at 1:502:1:503/+/97.81%
         """
-
-
-        pattern = re.compile(
-            r"(?P<id>\d+)\s+(?P<size>\d+)(?P<type>aa|nt), >(?P<name>.+?)\.\.\. (?P<attr>.+)"
-        )
-        attrpatt = re.compile(         
-            r"(?P<ref>\*|at) .*?(?P<strand>[+-]?)\/?(?P<percent>\d+\.?\d*)%"
-        )
-
-
-        match = pattern.search(self.line)
+        match = CLUSTER_SEQUENCE_PATTERN.fullmatch(self.line)
+        if not match:
+            self._raise_parsing_error()
 
         self.seqtype = SeqType.PROTEIN if match["type"] == "aa" else SeqType.NT
         self.strand  = Strand.NONE if self.seqtype == SeqType.PROTEIN else Strand.PLUS
-        if match:
-            self.name = match["name"]
-            self.id = int(match["id"])
-            self.length = int(match["size"])
-            if match["attr"] == "*":
-                self.is_ref = True
-                self.identity = 100.0
-                
-            else:
-                attrs = attrpatt.match(match["attr"])
-                self.is_ref = False
-                self.identity = float(attrs["percent"])
-                self.strand = Strand.PLUS if attrs["strand"] == "+" else Strand.REVERSE if attrs["strand"] == "-" else Strand.NONE
+        self.name = match["name"]
+        self.id = int(match["id"])
+        self.length = int(match["size"])
+        if match["attr"] == "*":
+            self.is_ref = True
+            self.identity = 100.0
+            return
+
+        attrs = CLUSTER_ATTR_PATTERN.fullmatch(match["attr"])
+        if not attrs:
+            self._raise_parsing_error()
+
+        self.is_ref = False
+        self.identity = float(attrs["percent"])
+        self.strand = Strand.PLUS if attrs["strand"] == "+" else Strand.REVERSE if attrs["strand"] == "-" else Strand.NONE
+
+    def _raise_parsing_error(self):
+        if self.line_number is not None:
+            raise ParsingError(self.line_number)
+        raise ValueError(f"Invalid cluster sequence line: {self.line}")
 
     def __repr__(self):
         return f"ClusterSequence(id={self.id}, name={self.name}, length={self.length}, identity={self.identity}, is_ref={self.is_ref}, seqtype={self.seqtype}, strand={self.strand})"
@@ -220,7 +227,7 @@ class FastaReader:
 
             line = line.strip()
             if not line.startswith(">"):
-                clusterSequences.append( ClusterSequence(line.strip()) )
+                clusterSequences.append(ClusterSequence(line.strip(), line_number=self._line_number))
                 if self._sequence_continues():
                     continue
                 return clusterSequences
@@ -330,7 +337,7 @@ class ClstrReader:
 
             line = line.strip()
             if not line.startswith(">"):
-                clusterSequences.append( ClusterSequence(line.strip()) )
+                clusterSequences.append(ClusterSequence(line.strip(), line_number=self._line_number))
                 if self._sequence_continues():
                     continue
                 return clusterSequences

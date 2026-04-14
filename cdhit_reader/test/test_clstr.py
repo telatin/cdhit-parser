@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from io import StringIO
 
 import pytest
 import sys
@@ -60,6 +61,13 @@ def test_aa():
             assert [s.name for s in cluster.sequences] == cluster2
             assert cluster.refname == cluster2[0]
         n += 1
+
+
+def test_invalid_member_line_raises_parsing_error():
+    with pytest.raises(ParsingError) as excinfo:
+        list(read_cdhit(StringIO(">Cluster 0\n0 492nt, >seq1.A...\n")))
+
+    assert excinfo.value.line_number == 2
         
 def _test_cluster_structure(cluster):
     # name
