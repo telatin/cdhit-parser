@@ -1,6 +1,6 @@
 from importlib import import_module
 
-from ._reader import ParsingError, ClusterSequence, Cluster, ClstrReader, read_cdhit, SeqType, Strand
+from ._reader import ParsingError, ClusterSequence, Cluster, Clustering, ClstrReader, read_cdhit, SeqType, Strand
 from ._fasta import FastaParsingError, Sequence, FastaReader, read_fasta
 from ._version import __version__
 
@@ -15,6 +15,7 @@ __all__ = [
     "FastaParsingError",
     "ClusterSequence",
     "Cluster",
+    "Clustering",
     "ClstrReader",
     "read_cdhit",
     "FastaReader",

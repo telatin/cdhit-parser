@@ -26,8 +26,7 @@ class FastaParsingError(Exception):
         Line number.
         """
         return self._line_number
- 
- 
+
 
 class Sequence:
     def __init__(self, name, sequence, comment=None, separator=" ", line_length=0):
@@ -36,24 +35,24 @@ class Sequence:
         self.comment = comment
         self.separator = separator
         self.line_length = line_length
-    
+
     def __repr__(self) -> str:
         comment_string = self.separator + self.comment if self.comment else ""
         sequence = self.sequence if self.line_length == 0 else self.wrap(self.sequence, self.line_length)
         return f">{self.name}{comment_string}\n{sequence}"
-    
 
-    def wrap(self, sequence, line_length):
+    @staticmethod
+    def wrap(sequence, line_length):
         return "\n".join(sequence[i:i + line_length] for i in range(0, len(sequence), line_length))
+
     def __len__(self):
         return len(self.sequence)
- 
 
 
 class FastaReader:
     """
     FASTA reader
-    """    
+    """
     def __init__(self, file: Union[str, Path, IO[str]], separator=" ", line_len=0):
         """
         Parameters
@@ -70,7 +69,6 @@ class FastaReader:
         self.separator = separator
         self.line_len = line_len
         self._file = file
-        self._seq = ""
         self._lines = peekable(line for line in file)
         self._line_number = 0
         self._current_defline_number = 0
@@ -84,8 +82,11 @@ class FastaReader:
         Next item.
         """
         defline = self._next_defline()
-        name = defline.split(maxsplit=1)[0]
-        comment = defline.split(maxsplit=1)[1] if len(defline.split(maxsplit=1)) > 1 else None
+        parts = defline.split(maxsplit=1)
+        if not parts:
+            raise FastaParsingError(self._current_defline_number, "Missing sequence name in FASTA header")
+        name = parts[0]
+        comment = parts[1] if len(parts) > 1 else None
         sequence = self._next_sequences()
         return Sequence(name, sequence, comment, separator=self.separator, line_length=self.line_len)
 
@@ -107,11 +108,7 @@ class FastaReader:
 
     def _next_defline(self) -> str:
         while True:
-            try:
-                line = next(self._lines)
-            except StopIteration:
-                raise StopIteration
-
+            line = next(self._lines)
             self._line_number += 1
 
             line = line.strip()
@@ -147,7 +144,6 @@ class FastaReader:
             if self._sequence_continues():
                 continue
             return seq
-     
 
     def _sequence_continues(self):
         try:
@@ -155,8 +151,6 @@ class FastaReader:
         except StopIteration:
             return False
 
-        if next_line == "":
-            return False
         next_line = next_line.strip()
         return len(next_line) > 0 and not next_line.startswith(">")
 
@@ -175,8 +169,9 @@ class FastaReader:
         del exception_value
         del traceback
         self.close()
-            
-def read_fasta(file: Union[str, Path, IO[str]], separator=" ", line_len = 0) -> FastaReader:
+
+
+def read_fasta(file: Union[str, Path, IO[str]], separator=" ", line_len=0) -> FastaReader:
     """
     Open a FASTA file for reading.
 
