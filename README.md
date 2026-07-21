@@ -29,6 +29,24 @@ Load all clusters in to a list:
 clusters = read_cdhit(input).read_items()
 ```
 
+### Sequence to cluster lookup
+
+`Clustering` loads a whole .clstr file and provides a reverse index
+(`seqcluster`) mapping each sequence name to the name of its cluster:
+
+```python
+from cdhit_reader import Clustering
+
+clustering = Clustering.from_file(input)
+
+print(len(clustering))                      # number of clusters
+for cluster in clustering:                  # iterate over the clusters
+    print(cluster.name)
+
+# Which cluster does a sequence belong to?
+print(clustering.seqcluster["seq1.A"])      # e.g. "Cluster 0"
+```
+
 ## Read FASTA file
 
 ```python
